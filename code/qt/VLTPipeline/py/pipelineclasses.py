@@ -28,6 +28,8 @@ class Project:
         self.EditJson = "EditJson"
         self.EditCSV = "EditCSV"
         self.IniPath = "IniPath"
+        self.BlendFiles = []
+        
         
         
         
