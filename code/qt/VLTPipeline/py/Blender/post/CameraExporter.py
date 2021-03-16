@@ -85,7 +85,8 @@ class CameraExporter():
             
             return False
     def ExportFBXFile(self, obj):
-        name = bpy.path.clean_name(obj.name)
+        filename = os.path.splitext( os.path.basename(bpy.data.filepath))[0]
+        name = filename+"_"+bpy.path.clean_name(obj.name) 
         camerasfolder = os.path.join(self.basedir, "cameras/" + name)
         if not os.path.exists(camerasfolder):
             os.makedirs(camerasfolder)
