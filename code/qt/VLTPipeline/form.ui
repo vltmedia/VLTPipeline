@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainwindow</class>
+ <widget class="QMainWindow" name="mainwindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>779</width>
+    <height>586</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>mainwindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>510</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Create Edit JSON</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>451</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Post Production Pipeline Wizard</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>760</y>
+      <width>491</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="text">
+          <string>Load Config File</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditConfigLocation"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>Create Config File</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>80</y>
+      <width>541</width>
+      <height>359</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Project Name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditProjectName"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Version</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditVersion"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonSelectCSV">
+       <property name="text">
+        <string>Select CSV</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditCSVPath"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_AudioFileSelect">
+       <property name="text">
+        <string>Select Audio File</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditAudio"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_OutputFolder">
+       <property name="text">
+        <string>Select Output Folder</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditOutputFolder"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>779</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Config"/>
+    <addaction name="actionSave_Config"/>
+    <addaction name="actionLoad_Project_Window"/>
+    <addaction name="actionImport_Config"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuCommands">
+    <property name="title">
+     <string>Commands</string>
+    </property>
+    <widget class="QMenu" name="menuFFMPEG">
+     <property name="title">
+      <string>Blender</string>
+     </property>
+     <widget class="QMenu" name="menuFFMPEG_2">
+      <property name="title">
+       <string>FFMPEG</string>
+      </property>
+      <addaction name="actionSave_Combine_Video_Scripts"/>
+      <addaction name="actionSave_Combine_Video_Scripts_2"/>
+     </widget>
+     <widget class="QMenu" name="menuBasic">
+      <property name="title">
+       <string>Basic</string>
+      </property>
+      <addaction name="actionSet_Scene_Shot_Blender_Files"/>
+     </widget>
+     <addaction name="menuBasic"/>
+     <addaction name="menuFFMPEG_2"/>
+    </widget>
+    <widget class="QMenu" name="menuUniversal">
+     <property name="title">
+      <string>Universal</string>
+     </property>
+     <addaction name="actionCreate_Edit_JSON"/>
+    </widget>
+    <addaction name="menuFFMPEG"/>
+    <addaction name="menuUniversal"/>
+   </widget>
+   <widget class="QMenu" name="menuPipeline">
+    <property name="title">
+     <string>Pipeline</string>
+    </property>
+    <addaction name="actionOpen_Project_Pipeline_Folder"/>
+    <addaction name="actionOpen_Project_Scene_Output_Folder"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuCommands"/>
+   <addaction name="menuPipeline"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionLoad_Config">
+   <property name="text">
+    <string>Refresh UI From Config</string>
+   </property>
+  </action>
+  <action name="actionSave_Config">
+   <property name="text">
+    <string>Save  Config</string>
+   </property>
+  </action>
+  <action name="actionCreate_Combine_Files">
+   <property name="text">
+    <string>Create Combine Files</string>
+   </property>
+  </action>
+  <action name="actionSave_Combine_Video_Scripts">
+   <property name="text">
+    <string>Combine Exported Scene Videos</string>
+   </property>
+  </action>
+  <action name="actionSave_Combine_Video_Scripts_2">
+   <property name="text">
+    <string>Save Combine Video Scripts</string>
+   </property>
+  </action>
+  <action name="actionCreate_Edit_JSON">
+   <property name="text">
+    <string>Create Edit JSON</string>
+   </property>
+  </action>
+  <action name="actionOpen_Project_Pipeline_Folder">
+   <property name="text">
+    <string>Open Project Pipeline Folder</string>
+   </property>
+  </action>
+  <action name="actionOpen_Project_Scene_Output_Folder">
+   <property name="text">
+    <string>Open Project Scene Output Folder</string>
+   </property>
+  </action>
+  <action name="actionLoad_Project_Window">
+   <property name="text">
+    <string>Load Project Window</string>
+   </property>
+  </action>
+  <action name="actionImport_Config">
+   <property name="text">
+    <string>Import Config</string>
+   </property>
+  </action>
+  <action name="actionSet_Scene_Shot_Blender_Files">
+   <property name="text">
+    <string>Set Scene Shot Blender Files</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButtonSelectCSV</sender>
+   <signal>clicked()</signal>
+   <receiver>mainwindow</receiver>
+   <slot>SelectCSV()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_AudioFileSelect</sender>
+   <signal>clicked()</signal>
+   <receiver>mainwindow</receiver>
+   <slot>SelectAudioFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>91</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>152</x>
+     <y>159</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_OutputFolder</sender>
+   <signal>clicked()</signal>
+   <receiver>mainwindow</receiver>
+   <slot>SetOutputFolder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>422</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>241</x>
+     <y>227</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>mainwindow</receiver>
+   <slot>CreateEditJSON()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>544</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>169</x>
+     <y>307</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>mainwindow</receiver>
+   <slot>LoadConfigFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>779</x>
+     <y>798</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>428</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>mainwindow</receiver>
+   <slot>CreateConfigFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>781</x>
+     <y>848</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>453</x>
+     <y>134</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SelectCSV()</slot>
+  <slot>SelectAudioFile()</slot>
+  <slot>SetOutputFolder()</slot>
+  <slot>CreateEditJSON()</slot>
+  <slot>LoadConfigFile()</slot>
+  <slot>CreateConfigFile()</slot>
+ </slots>
+</ui>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>398</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QListWidget" name="listWidgetBlendFilesImport">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>341</width>
+      <height>421</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>451</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Set Project Blend Files</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>500</y>
+      <width>341</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="pushButtonSelectBlendFiles">
+       <property name="text">
+        <string>Select Blend Files</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QPushButton" name="pushButtonSaveToProjectFile">
+       <property name="text">
+        <string>Save All To Project File</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QPushButton" name="pushButtonSaveRenderFilesSelected">
+       <property name="text">
+        <string>Save Render Files For Selected</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="pushButtonSaveRenderFilesAll">
+       <property name="text">
+        <string>Save Render Files For Selected</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>398</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuSetups">
+     <property name="title">
+      <string>Setups</string>
+     </property>
+     <widget class="QMenu" name="menuSelected">
+      <property name="title">
+       <string>Selected</string>
+      </property>
+      <addaction name="actionPlayblast_Eevee_Setup"/>
+     </widget>
+     <widget class="QMenu" name="menuAll">
+      <property name="title">
+       <string>All</string>
+      </property>
+      <addaction name="actionPlayblast_Eevee_Setup_2"/>
+     </widget>
+     <addaction name="menuSelected"/>
+     <addaction name="menuAll"/>
+    </widget>
+    <addaction name="menuSetups"/>
+    <addaction name="actionAdd_Blend_Files"/>
+    <addaction name="actionSave_Project_File"/>
+   </widget>
+   <widget class="QMenu" name="menuCameras">
+    <property name="title">
+     <string>Cameras</string>
+    </property>
+    <widget class="QMenu" name="menuSelected_2">
+     <property name="title">
+      <string>Selected</string>
+     </property>
+     <addaction name="actionExport_All_Cameras_In_File"/>
+    </widget>
+    <widget class="QMenu" name="menuAll_2">
+     <property name="title">
+      <string>All</string>
+     </property>
+     <addaction name="actionExport_All_Cameras_In_File_2"/>
+    </widget>
+    <addaction name="menuSelected_2"/>
+    <addaction name="menuAll_2"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuCameras"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionPlayblast_Eevee_Setup">
+   <property name="text">
+    <string>Playblast &amp; Eevee Setup</string>
+   </property>
+  </action>
+  <action name="actionPlayblast_Eevee_Setup_2">
+   <property name="text">
+    <string>Playblast &amp; Eevee Setup</string>
+   </property>
+  </action>
+  <action name="actionAdd_Blend_Files">
+   <property name="text">
+    <string>Add Blend Files</string>
+   </property>
+  </action>
+  <action name="actionSave_Project_File">
+   <property name="text">
+    <string>Save Project File</string>
+   </property>
+  </action>
+  <action name="actionExport_All_Cameras_In_File">
+   <property name="text">
+    <string>Export All Cameras In File</string>
+   </property>
+  </action>
+  <action name="actionExport_All_Cameras_In_File_2">
+   <property name="text">
+    <string>Export All Cameras In File</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
