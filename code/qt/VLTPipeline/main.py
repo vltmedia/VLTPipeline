@@ -258,6 +258,9 @@ class mainwindow(QMainWindow):
                                                                 
         actionSet_Scene_Shot_Blender_Files = self.window.findChild(QObject, 'actionSet_Scene_Shot_Blender_Files')
         actionSet_Scene_Shot_Blender_Files.triggered.connect(self.OpenSetBlendFilesWindow)
+                                                                        
+        actionSet_Scene_Shot_Blender_Files = self.window.findChild(QObject, 'actionSet_Scene_Shot_Blender_Files')
+        actionSet_Scene_Shot_Blender_Files.triggered.connect(self.OpenSetBlendFilesWindow)
         
         self.lineEditCSVPath = self.window.findChild(QLineEdit, 'lineEditCSVPath')
         self.lineEditCSVPath.setText("-")

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>398</width>
-    <height>600</height>
+    <width>387</width>
+    <height>616</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,10 +42,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Set Project Blend Files</string>
+     <string>Project Blend Files</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -55,28 +55,95 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QPushButton" name="pushButtonSelectBlendFiles">
-       <property name="text">
-        <string>Select Blend Files</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1" colspan="2">
       <widget class="QPushButton" name="pushButtonSaveToProjectFile">
        <property name="text">
-        <string>Save All To Project File</string>
+        <string>Save Settings</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" colspan="2">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="pushButtonSelectBlendFiles">
+       <property name="text">
+        <string>Import  Blend Files</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="pushButtonSaveToProjectFile_2">
+       <property name="text">
+        <string>Open Project File</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButtonRemoveItem">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>40</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>pushButtonRemoveItem</string>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonMoveItemUp">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>40</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>pushButtonMoveItemUp</string>
+    </property>
+    <property name="text">
+     <string>u</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonMoveItemDown">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>40</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>pushButtonMoveItemDown</string>
+    </property>
+    <property name="text">
+     <string>d</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>68</x>
+      <y>610</y>
+      <width>322</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
       <widget class="QPushButton" name="pushButtonSaveRenderFilesSelected">
        <property name="text">
         <string>Save Render Files For Selected</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
+     <item>
       <widget class="QPushButton" name="pushButtonSaveRenderFilesAll">
        <property name="text">
         <string>Save Render Files For Selected</string>
@@ -91,7 +158,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>398</width>
+     <width>387</width>
      <height>20</height>
     </rect>
    </property>
@@ -121,6 +188,7 @@
     <addaction name="menuSetups"/>
     <addaction name="actionAdd_Blend_Files"/>
     <addaction name="actionSave_Project_File"/>
+    <addaction name="actionOpen_Project_File"/>
    </widget>
    <widget class="QMenu" name="menuCameras">
     <property name="title">
@@ -173,6 +241,11 @@
   <action name="actionExport_All_Cameras_In_File_2">
    <property name="text">
     <string>Export All Cameras In File</string>
+   </property>
+  </action>
+  <action name="actionOpen_Project_File">
+   <property name="text">
+    <string>Open Project File</string>
    </property>
   </action>
  </widget>

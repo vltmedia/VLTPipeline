@@ -33,6 +33,7 @@ class SetBlendFiles(QMainWindow):                           # <===
         self.setWindowTitle("Load Projects")
         self.parent = parent
         self.blendfiles = []
+        self.selectedBlendIndex = 0
         self.projectspath = parent.PostPipeline.dirname +"projects"
         self.load_ui()
 
@@ -53,6 +54,7 @@ class SetBlendFiles(QMainWindow):                           # <===
     def ItemClicked(self, item):
         selectedBlend = self.blendfiles[item.row()]
         self.selectedBlend = selectedBlend
+        self.selectedBlendIndex = item.row()
         self.ShowStatusMessage("Selected | " + selectedBlend)
         
         # print(selectedBlend)
@@ -78,6 +80,11 @@ class SetBlendFiles(QMainWindow):                           # <===
         self.parent.PostPipeline.MainProject.BlendFiles = self.blendfiles   
         self.parent.SaveConfigFile() 
         self.ShowStatusMessage("Succesfully added | " + str(len(self.blendfiles)) + " Blend files to the Project!!")
+            
+    def Open_Project_File(self):
+        os.startfile(self.selectedBlend, 'open')
+        
+        self.ShowStatusMessage("Succesfully opened the Project! | " + os.path.basename(self.selectedBlend))
     
     def LoadProjectBlendFiles(self):
         # print(self.parent.PostPipeline.MainProject.BlendFiles)
@@ -87,6 +94,14 @@ class SetBlendFiles(QMainWindow):                           # <===
             for bfile in self.parent.PostPipeline.MainProject.BlendFiles:
                 newitem = QListWidgetItem(os.path.basename(bfile))
                 self.listWidgetBlendFilesImport.addItem(newitem)
+        
+    def RefreshProjectBlendFilesList(self):
+        # print(self.parent.PostPipeline.MainProject.BlendFiles)
+        # print(type(self.parent.PostPipeline.MainProject.BlendFiles))
+        self.listWidgetBlendFilesImport.clear()
+        for bfile in self.parent.PostPipeline.MainProject.BlendFiles:
+            newitem = QListWidgetItem(os.path.basename(bfile))
+            self.listWidgetBlendFilesImport.addItem(newitem)
         
     def actionExport_All_Cameras_In_File(self):
         # print(self.parent.PostPipeline.MainProject.BlendFiles)
@@ -165,6 +180,32 @@ class SetBlendFiles(QMainWindow):                           # <===
             count = newcount   
         self.ShowStatusMessage("Succesfully Created the Blender Post Files!" )
         
+    def RemoveItem(self):
+        
+        self.blendfiles.pop(self.selectedBlendIndex)
+        self.RefreshProjectBlendFilesList()
+                
+    def MoveItemUp(self):
+        newindex = self.selectedBlendIndex - 1
+        if newindex > -1:
+            self.blendfiles.insert(newindex, self.blendfiles.pop(self.selectedBlendIndex))
+            self.selectedBlendIndex = newindex
+
+            self.RefreshProjectBlendFilesList()
+        else:
+            self.ShowStatusMessage("Item is already at the Top!" )
+            
+                        
+    def MoveItemDown(self):
+        newindex = self.selectedBlendIndex + 1
+        if newindex < len(self.blendfiles):
+            
+            self.blendfiles.insert(newindex, self.blendfiles.pop(self.selectedBlendIndex))
+            self.selectedBlendIndex = newindex
+
+            self.RefreshProjectBlendFilesList()
+        else:
+            self.ShowStatusMessage("Item is already at the Bottom!" )
         
     def load_ui(self):
         loader = QUiLoader()
@@ -211,6 +252,18 @@ class SetBlendFiles(QMainWindow):                           # <===
         actionExport_All_Cameras_In_File_2 = self.window.findChild(QObject, 'actionExport_All_Cameras_In_File_2')
         actionExport_All_Cameras_In_File_2.triggered.connect(self.Export_All_Cameras_In_AllFiles)
 
+        actionOpen_Project_File = self.window.findChild(QObject, 'actionOpen_Project_File')
+        actionOpen_Project_File.triggered.connect(self.Open_Project_File)
+                                                                        
+        pushButtonRemoveItem = self.window.findChild(QObject, 'pushButtonRemoveItem')
+        pushButtonRemoveItem.clicked.connect(self.RemoveItem)
+                                                                                
+        pushButtonMoveItemUp = self.window.findChild(QObject, 'pushButtonMoveItemUp')
+        pushButtonMoveItemUp.clicked.connect(self.MoveItemUp)
+                                                                                        
+        pushButtonMoveItemDown = self.window.findChild(QObject, 'pushButtonMoveItemDown')
+        pushButtonMoveItemDown.clicked.connect(self.MoveItemDown)
+        
         # newitem = QListWidgetItem("thing 1")
         # self.listWidget.addItem(newitem)
         self.LoadProjectBlendFiles()
