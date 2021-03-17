@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>779</width>
+    <width>938</width>
     <height>586</height>
    </rect>
   </property>
@@ -48,7 +48,7 @@
      <string>Post Production Pipeline Wizard</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>700</x>
@@ -81,7 +81,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -195,13 +195,33 @@
      </item>
     </layout>
    </widget>
+   <widget class="QTableWidget" name="tableWidgetUser">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>70</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableView" name="tableViewUsers">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>290</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>779</width>
+     <width>938</width>
      <height>20</height>
     </rect>
    </property>
@@ -259,10 +279,17 @@
     <addaction name="actionOpen_Project_Pipeline_Folder"/>
     <addaction name="actionOpen_Project_Scene_Output_Folder"/>
    </widget>
+   <widget class="QMenu" name="menuUser">
+    <property name="title">
+     <string>User</string>
+    </property>
+    <addaction name="actionRefresh_User"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuCommands"/>
    <addaction name="menuPipeline"/>
+   <addaction name="menuUser"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoad_Config">
@@ -318,6 +345,11 @@
   <action name="actionSet_Scene_Shot_Blender_Files">
    <property name="text">
     <string>Set Scene Shot Blender Files</string>
+   </property>
+  </action>
+  <action name="actionRefresh_User">
+   <property name="text">
+    <string>Refresh User</string>
    </property>
   </action>
  </widget>

@@ -7,10 +7,12 @@ FILEBROWSER_PATH = os.path.join(os.getenv('WINDIR'), 'explorer.exe')
 from PySide2.QtCore import QFile, Slot
 from PySide2.QtWidgets import QPushButton, QLineEdit, QStatusBar
 from PySide2.QtCore import  QObject, QUrl
-from PySide2.QtWidgets import QApplication, QMainWindow,QFileDialog
-from PySide2.QtCore import QFile
+from PySide2.QtWidgets import QApplication, QMainWindow,QFileDialog, QTableWidget, QTableView
+from PySide2.QtCore import QFile, Qt
 from PySide2.QtUiTools import QUiLoader
 
+from py.models.util.user_model import UserClass, UsersModel
+from py.models.util.UniversalTable import UniversalTableModel, UniversalTableFromClassModel
 from py.postpipelinefiles import PostPipeline
 from py.createffmpegeditfiles import RunMainProcess, RunProcessProject, RunProcessBatsProject
 
@@ -210,6 +212,25 @@ class mainwindow(QMainWindow):
         
         self.UpdateLineEdits()
         self.ShowStatusMessage("Imported Config File! | " + fileName)
+            
+    def Refresh_User(self):
+        # self.user = UserClass()
+        
+        # self.user.UpdateQTTableEntry(self.tableWidgetUser)
+        
+        
+        self.users = [UserClass("dev").GetDict(),UserClass("Bon").GetDict(),UserClass("roll").GetDict(),UserClass("dug").GetDict()]
+        self.usersb = [UserClass("dev"),UserClass("Bon"),UserClass("roll"),UserClass("dug")]
+        # self.usersmodel = UniversalTableModel(self.users)
+        self.usersmodel = UniversalTableFromClassModel(self.usersb)
+        # self.users = UsersModel()
+        # self.users.setHeaderData(1, Qt.Horizontal, 'Date')
+        # self.tableViewUsers.setModel(self.users)
+        self.tableViewUsers.setModel(self.usersmodel)
+        # self.user.UpdateQTTableEntry(self.tableViewUsers)
+        
+        # print(self.users)
+        self.ShowStatusMessage("Succesfully Refreshed the user! | " + self.users[0]["Name"])
     
     def load_ui(self):
         loader = QUiLoader()
@@ -261,6 +282,12 @@ class mainwindow(QMainWindow):
                                                                         
         actionSet_Scene_Shot_Blender_Files = self.window.findChild(QObject, 'actionSet_Scene_Shot_Blender_Files')
         actionSet_Scene_Shot_Blender_Files.triggered.connect(self.OpenSetBlendFilesWindow)
+                                                                                
+        actionRefresh_User = self.window.findChild(QObject, 'actionRefresh_User')
+        actionRefresh_User.triggered.connect(self.Refresh_User)
+        
+        self.tableWidgetUser = self.window.findChild(QTableWidget, 'tableWidgetUser')
+        self.tableViewUsers = self.window.findChild(QTableView, 'tableViewUsers')
         
         self.lineEditCSVPath = self.window.findChild(QLineEdit, 'lineEditCSVPath')
         self.lineEditCSVPath.setText("-")
@@ -293,6 +320,7 @@ class mainwindow(QMainWindow):
         
         
         self.LoadConfigFile()
+        self.Refresh_User()
         
         self.window.show()
         
