@@ -11,8 +11,13 @@ from PySide2.QtWidgets import QApplication, QMainWindow,QFileDialog, QTableWidge
 from PySide2.QtCore import QFile, Qt
 from PySide2.QtUiTools import QUiLoader
 
+from palette.FusioPalette import QDarkPalette
+
+from py.models.util.memory_class import UserMemoryClass
+
 from py.models.util.user_model import UserClass, UsersModel
 from py.models.util.UniversalTable import UniversalTableModel, UniversalTableFromClassModel
+from py.models.util.UniversalParser import UniversalParser
 from py.postpipelinefiles import PostPipeline
 from py.createffmpegeditfiles import RunMainProcess, RunProcessProject, RunProcessBatsProject
 
@@ -54,6 +59,7 @@ class mainwindow(QMainWindow):
     def __init__(self):
         super(mainwindow, self).__init__()
         self.PostPipeline = PostPipeline()
+        self.UserMemoryClass = UserMemoryClass(UserClass("Not Logged In"))
         self.load_ui()
         
     
@@ -212,6 +218,16 @@ class mainwindow(QMainWindow):
         
         self.UpdateLineEdits()
         self.ShowStatusMessage("Imported Config File! | " + fileName)
+                
+    def RunTest1(self):
+        usclass = self.users[0]
+        outpath = self.PostPipeline.MainProject.OutputFolder + "/pipeline/Test.ini"
+        self.UniParse = UniversalParser()
+        # self.UniParse.FromClassCreateConfig(usclass,outpath)
+        self.UniParse.ToClassFromGeneratedIni(outpath,usclass)
+        print("Imported Config File! | ", usclass.Name)
+        self.ShowStatusMessage("Imported Config File! | " + outpath)
+        
             
     def Refresh_User(self):
         # self.user = UserClass()
@@ -219,10 +235,11 @@ class mainwindow(QMainWindow):
         # self.user.UpdateQTTableEntry(self.tableWidgetUser)
         
         
-        self.users = [UserClass("dev").GetDict(),UserClass("Bon").GetDict(),UserClass("roll").GetDict(),UserClass("dug").GetDict()]
-        self.usersb = [UserClass("dev"),UserClass("Bon"),UserClass("roll"),UserClass("dug")]
+        # self.users = [UserClass("dev").GetDict(),UserClass("Bon").GetDict(),UserClass("roll").GetDict(),UserClass("dug").GetDict()]
+        # self.users = [UserClass("dev"),UserClass("Bon"),UserClass("roll"),UserClass("dug")]
+        self.users = [self.UserMemoryClass.User]
         # self.usersmodel = UniversalTableModel(self.users)
-        self.usersmodel = UniversalTableFromClassModel(self.usersb)
+        self.usersmodel = UniversalTableFromClassModel(self.users)
         # self.users = UsersModel()
         # self.users.setHeaderData(1, Qt.Horizontal, 'Date')
         # self.tableViewUsers.setModel(self.users)
@@ -230,7 +247,7 @@ class mainwindow(QMainWindow):
         # self.user.UpdateQTTableEntry(self.tableViewUsers)
         
         # print(self.users)
-        self.ShowStatusMessage("Succesfully Refreshed the user! | " + self.users[0]["Name"])
+        self.ShowStatusMessage("Succesfully Refreshed the user! | " + self.users[0].Name)
     
     def load_ui(self):
         loader = QUiLoader()
@@ -282,6 +299,9 @@ class mainwindow(QMainWindow):
                                                                         
         actionSet_Scene_Shot_Blender_Files = self.window.findChild(QObject, 'actionSet_Scene_Shot_Blender_Files')
         actionSet_Scene_Shot_Blender_Files.triggered.connect(self.OpenSetBlendFilesWindow)
+                                                                                    
+        action1 = self.window.findChild(QObject, 'action1')
+        action1.triggered.connect(self.RunTest1)
                                                                                 
         actionRefresh_User = self.window.findChild(QObject, 'actionRefresh_User')
         actionRefresh_User.triggered.connect(self.Refresh_User)
@@ -330,4 +350,6 @@ if __name__ == "__main__":
     app = QApplication([])
     widget = mainwindow()
     widget.show()
+    DarkPalette = QDarkPalette()
+    DarkPalette.set_app(app)
     sys.exit(app.exec_())

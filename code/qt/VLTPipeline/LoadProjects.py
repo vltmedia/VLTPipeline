@@ -3,6 +3,7 @@ import sys
 import os
 import subprocess
 FILEBROWSER_PATH = os.path.join(os.getenv('WINDIR'), 'explorer.exe')
+from palette.FusioPalette import QDarkPalette
 
 from PySide2.QtCore import QFile, Slot
 from PySide2.QtWidgets import QPushButton, QLineEdit, QStatusBar
@@ -86,4 +87,6 @@ if __name__ == "__main__":
     app = QApplication([])
     widget = loadProjects()
     widget.window.show()
+    DarkPalette = QDarkPalette()
+    DarkPalette.set_app(app)
     sys.exit(app.exec_())
