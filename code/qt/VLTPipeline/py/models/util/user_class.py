@@ -8,7 +8,7 @@ class UserClass():
         super(UserClass, self).__init__()
         self.id = 0
         self.Name = "dev"
-        self.Groups = "-"
+        self.Groups = []
         self.GroupNameOveride = "-"
         self.About = "-"
         self.Email = "dev@company.com"
