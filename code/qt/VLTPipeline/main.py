@@ -20,6 +20,12 @@ from py.models.util.UniversalTable import UniversalTableModel, UniversalTableFro
 from py.models.util.UniversalParser import UniversalParser
 from py.postpipelinefiles import PostPipeline
 from py.createffmpegeditfiles import RunMainProcess, RunProcessProject, RunProcessBatsProject
+from py.models.util.project_class import GroupClass, ProjectClass, ClientClass
+from py.models.util.scene_class import SceneClass, ShotClass
+from py.models.util.software_class import RenderEngine ,  RenderEngineArnold , RenderEngineCycles, RenderEngineEevee , RenderEngineKarma, RenderEngineMantra , RenderEngineOctane, RenderEngineOpenGL , RenderEnginePhysicalC4D, RenderEngineRedshift , RenderEngineStandardC4D, RenderEngineUnity , RenderEngineUnreal, RenderEngineVRay , RenderEngineWorkBench
+
+
+
 
 from LoadProjects import  loadProjects
 from setBlendFiles import  SetBlendFiles
@@ -239,7 +245,8 @@ class mainwindow(QMainWindow):
         # self.users = [UserClass("dev"),UserClass("Bon"),UserClass("roll"),UserClass("dug")]
         self.users = [self.UserMemoryClass.User]
         # self.usersmodel = UniversalTableModel(self.users)
-        self.usersmodel = UniversalTableFromClassModel(self.users)
+        # self.usersmodel = UniversalTableFromClassModel(self.users)
+        self.usersmodel = UniversalTableFromClassModel(RenderEngine().getRenderEngines())
         # self.users = UsersModel()
         # self.users.setHeaderData(1, Qt.Horizontal, 'Date')
         # self.tableViewUsers.setModel(self.users)
