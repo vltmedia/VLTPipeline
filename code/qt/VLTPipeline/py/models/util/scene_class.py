@@ -15,6 +15,7 @@ class SceneClass():
         self.Exports = Exports()
         self.Project = ProjectClass("Untitled", "VFX")
         self.Version = "01"
+        self.Description = "-"
         self.Icon = "-"
 
     def addShot(self, Shot):
@@ -48,8 +49,9 @@ class ShotClass():
         self.FullID = Scene.SceneID + "_" + Name
         self.Scene = Scene
         self.Version = "01"
+        self.Description = "-"
         self.ShotFiles = []
-        self.MainShotFile = ShotFileClass(self, "/")
+        self.MainShotFile = ShotFileClass(self)
         self.Icon = "-"
 
     def addShot(self, ShotFile):
@@ -85,11 +87,11 @@ class ShotClass():
 
 
 class ShotFileClass():
-    def __init__(self, Shot, Filepath):
+    def __init__(self, Shot):
         super(ShotFileClass, self).__init__()
         self.Id = 0
-        self.FilePath = Filepath
-        self.SoftwarePackage = SoftwarePackageBlender()
+        self.FilePath = ""
+        self.SoftwarePackage = SoftwarePackageBlender("Blender")
         self.Shot = Shot
         self.Dependencies = []
         self.Cameras=[]

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1301</width>
+    <height>755</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>1271</width>
+      <height>661</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>340</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Show Groups</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Show Clients</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>Show Projects</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>Show Shots</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1301</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuEditors">
+    <property name="title">
+     <string>Editors</string>
+    </property>
+    <addaction name="actionGroup_Editor"/>
+    <addaction name="actionClient_Editor"/>
+    <addaction name="actionProject_Editor"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEditors"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionGroup_Editor">
+   <property name="text">
+    <string>Group Editor</string>
+   </property>
+  </action>
+  <action name="actionClient_Editor">
+   <property name="text">
+    <string>Client Editor</string>
+   </property>
+  </action>
+  <action name="actionProject_Editor">
+   <property name="text">
+    <string>Project Editor</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ShowClients()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>36</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ShowProjects()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>388</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ShowShots()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>69</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ShowClients()</slot>
+  <slot>ShowProjects()</slot>
+  <slot>ShowShots()</slot>
+  <slot>ShowGroups()</slot>
+ </slots>
+</ui>

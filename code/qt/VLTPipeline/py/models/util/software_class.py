@@ -24,8 +24,8 @@ class SoftwarePackage():
 
 
 class SoftwarePackageBlender(SoftwarePackage):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, Name):
+        super(SoftwarePackage, self).__init__()
         self.Id = 10
         self.FilePath = ""
         self.SoftwareName = "Blender"
@@ -49,8 +49,8 @@ class SoftwarePackageBlender(SoftwarePackage):
 
 
 class SoftwarePackageHoudini(SoftwarePackage):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, Name):
+        super(SoftwarePackage, self).__init__()
         self.Id = 20
         self.FilePath = ""
         self.SoftwareName = "Houdini"
@@ -74,8 +74,8 @@ class SoftwarePackageHoudini(SoftwarePackage):
 
 
 class SoftwarePackageCinema4D(SoftwarePackage):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, Name):
+        super(SoftwarePackage, self).__init__()
         self.Id = 30
         self.FilePath = ""
         self.SoftwareName = "Cinema 4D"
@@ -98,13 +98,80 @@ class SoftwarePackageCinema4D(SoftwarePackage):
 
 
 class SoftwarePackageMaya(SoftwarePackage):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, Name):
+        super(SoftwarePackage, self).__init__()
         self.Id = 40
         self.FilePath = ""
         self.SoftwareName = "Maya"
         self.RenderEngine = RenderEngineMantra()
         self.AvailableRenderEngines = [ RenderEngineOpenGL(),  RenderEngineOctane(),RenderEngineArnold(), RenderEngineVRay(), RenderEngineRedshift(), RenderEngineCycles()]
+        self.CommandArguments = ""
+        self.Description = ""
+        self.Icon = "images/icons/software/maya.png"
+        
+
+    def __iter__(self):
+        return vars(self).iteritems()
+
+    def GetDict(self):
+        # print(self.__dict__)
+        return self.__dict__
+
+
+
+
+class SoftwarePackageFusion(SoftwarePackage):
+    def __init__(self, Name):
+        super(SoftwarePackage, self).__init__()
+        self.Id = 50
+        self.FilePath = ""
+        self.SoftwareName = "Fusion"
+        self.RenderEngine = RenderEngineMantra()
+        self.AvailableRenderEngines = [ RenderEngineOpenGL()]
+        self.CommandArguments = ""
+        self.Description = ""
+        self.Icon = "images/icons/software/maya.png"
+        
+
+    def __iter__(self):
+        return vars(self).iteritems()
+
+    def GetDict(self):
+        # print(self.__dict__)
+        return self.__dict__
+
+
+
+class SoftwarePackageAfterEffects(SoftwarePackage):
+    def __init__(self, Name):
+        super(SoftwarePackage, self).__init__()
+        self.Id = 60
+        self.FilePath = ""
+        self.SoftwareName = "AfterEffects"
+        self.RenderEngine = RenderEngineMantra()
+        self.AvailableRenderEngines = [ RenderEngineOpenGL()]
+        self.CommandArguments = ""
+        self.Description = ""
+        self.Icon = "images/icons/software/maya.png"
+        
+
+    def __iter__(self):
+        return vars(self).iteritems()
+
+    def GetDict(self):
+        # print(self.__dict__)
+        return self.__dict__
+
+
+
+class SoftwarePackagePremiere(SoftwarePackage):
+    def __init__(self, Name):
+        super(SoftwarePackage, self).__init__()
+        self.Id = 70
+        self.FilePath = ""
+        self.SoftwareName = "Premiere"
+        self.RenderEngine = RenderEngineMantra()
+        self.AvailableRenderEngines = [ RenderEngineOpenGL()]
         self.CommandArguments = ""
         self.Description = ""
         self.Icon = "images/icons/software/maya.png"

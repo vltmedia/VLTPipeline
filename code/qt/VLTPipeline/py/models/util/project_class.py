@@ -2,11 +2,26 @@ import sys
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import Qt
 from .exports_class import  Export, Exports, PreviewExport, FinalExport, Delivery
+# CREATE TABLE author (
+#     author_id INTEGER NOT NULL PRIMARY KEY,
+#     first_name VARCHAR,
+#     last_name VARCHAR
+# );
 
+# CREATE TABLE book (
+#     book_id INTEGER NOT NULL PRIMARY KEY,
+#     author_id INTEGER REFERENCES author,
+#     title VARCHAR
+# );
+
+# CREATE TABLE publisher (
+#     publisher_id INTEGER NOT NULL PRIMARY KEY,
+#     name VARCHAR
+# );
 class GroupClass():
     def __init__(self, Name):
         super(GroupClass, self).__init__()
-        self.Id = 0
+        self.Id = id(self)
         self.Name = Name
         self.Clients = []
         self.Users = []
@@ -15,6 +30,40 @@ class GroupClass():
         
     def setName(self, Name):
         self.Name = Name
+        
+    def loadFromSQL(self, array):
+        self.Id = array[0]
+        self.Name = array[1]
+        if array[2] != None:
+            self.Clients = array[2]
+        if array[3] != None:
+            self.Users = array[3]
+        self.Description = array[4]
+        self.Icon = array[5]
+        
+    def sqlTableGenerate(self):
+        commandd = "CREATE TABLE IF NOT EXISTS 'group' (           id INTEGER NOT NULL PRIMARY KEY, Name TEXT, Clients integer[], Users integer[], Description TEXT,Icon TEXT)"
+        # print("```````````````````Type``````````````````",type(commandd))
+        return commandd
+            
+    def sqlTableGetAll(self, db):
+        rows = db.cursor.execute("SELECT * FROM 'group'").fetchall()
+        return rows
+                    
+    def sqlUpdate(self, db, cursor):
+        params = (self.Id, self.Name, str(self.Clients), str(self.Users), self.Description,
+        self.Icon)
+        print(params)
+        commandd = """
+INSERT INTO 'group' (id, Name, Clients, Users, Description, Icon)
+VALUES (?, ?, ?, ?, ? , ?);"""
+        cursor.execute(commandd, params)
+        db.commit()
+    
+    
+        return commandd
+   
+    
                 
     def setDescription(self, Description):
         self.Description = Description
@@ -91,7 +140,7 @@ class ProjectClass():
         self.ProjectType = ProjectType
         self.Scenes = []
         self.Exports = Exports()
-        self.Delivery = Delivery()
+        self.Delivery = Delivery(self)
 
     def setClient(self, Client):
         self.Client = Client

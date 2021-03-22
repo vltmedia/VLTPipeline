@@ -677,8 +677,15 @@
     <property name="title">
      <string>Pipeline</string>
     </property>
+    <widget class="QMenu" name="menuShot">
+     <property name="title">
+      <string>Shot</string>
+     </property>
+     <addaction name="actionShot_Editor"/>
+    </widget>
     <addaction name="actionOpen_Project_Pipeline_Folder"/>
     <addaction name="actionOpen_Project_Scene_Output_Folder"/>
+    <addaction name="menuShot"/>
    </widget>
    <widget class="QMenu" name="menuUser">
     <property name="title">
@@ -781,6 +788,11 @@
   <action name="action3">
    <property name="text">
     <string>3</string>
+   </property>
+  </action>
+  <action name="actionShot_Editor">
+   <property name="text">
+    <string>Shot Editor</string>
    </property>
   </action>
  </widget>

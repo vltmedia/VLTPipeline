@@ -29,6 +29,7 @@ from py.models.util.software_class import RenderEngine ,  RenderEngineArnold , R
 
 from LoadProjects import  loadProjects
 from setBlendFiles import  SetBlendFiles
+from ShotFileEditor import  shotFileEditorSChild
 
 def explore(path):
     # explorer would choke on forward slashes
@@ -208,6 +209,14 @@ class mainwindow(QMainWindow):
         self.setBlendFiles = SetBlendFiles(self)
         self.setBlendFiles.show()
         self.hide()
+        #                        
+    def OpenShot_Editor(self):
+        # self.loadprojectswindow = loadprojects(self)
+        # self.loadprojectswindow.show()
+        # self.w = Window2()
+        self.shotFileEditorSChild = shotFileEditorSChild(self)
+        self.shotFileEditorSChild.show()
+        self.hide()
         # LoadProjectWindow()
     
     def ImportConfig(self):
@@ -303,9 +312,9 @@ class mainwindow(QMainWindow):
                                                                 
         actionSet_Scene_Shot_Blender_Files = self.window.findChild(QObject, 'actionSet_Scene_Shot_Blender_Files')
         actionSet_Scene_Shot_Blender_Files.triggered.connect(self.OpenSetBlendFilesWindow)
-                                                                        
-        actionSet_Scene_Shot_Blender_Files = self.window.findChild(QObject, 'actionSet_Scene_Shot_Blender_Files')
-        actionSet_Scene_Shot_Blender_Files.triggered.connect(self.OpenSetBlendFilesWindow)
+                                                                            
+        actionShot_Editor = self.window.findChild(QObject, 'actionShot_Editor')
+        actionShot_Editor.triggered.connect(self.OpenShot_Editor)
                                                                                     
         action1 = self.window.findChild(QObject, 'action1')
         action1.triggered.connect(self.RunTest1)
