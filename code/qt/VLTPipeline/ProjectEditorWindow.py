@@ -5,6 +5,7 @@ from ui_EditorConfigWindow import Ui_MainWindow as EditorConfigWindow
 from ui_ClientEdit import ClientEdit
 # from ShotEditor  import Ui_Form as ShotEditor
 from ui_ShotEditor  import  ShotEditor
+from ProjectEditor    import ProjectEditor
 # from ClientEditor import ClientEdit
 from palette.FusioPalette import QDarkPalette
 
@@ -31,7 +32,7 @@ class MainWindow(QMainWindow):
             self.clientswindow.deleteLater()
         self.windowup = True    
         
-        self.clientswindow = ClientEdit(self)
+        self.clientswindow = ProjectEditor(self)
         self.clientswindow.setupUi(self)
         self.loadedwindow = self.clientswindow
         
@@ -65,6 +66,8 @@ if __name__ == "__main__":
 
     window = MainWindow()
     window.show()
+    window.ShowProjects()
+    
     DarkPalette = QDarkPalette()
     DarkPalette.set_app(app)
     sys.exit(app.exec_())

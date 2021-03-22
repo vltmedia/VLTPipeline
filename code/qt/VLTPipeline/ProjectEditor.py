@@ -13,10 +13,19 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 
-class Ui_Form(object):
+class ProjectEditor(object):
+    def __init__(self,parent):
+        super(ProjectEditor, self).__init__()
+        self.started = False
+        self.parent = parent
+        self.widget = QWidget()
+        self.setupUi(self.widget)
+    
+    def ClickedA(self):
+        print("Clicked A | 1")
     def setupUi(self, Form):
         if not Form.objectName():
-            Form.setObjectName(u"Form")
+            Form.setObjectName(u"Project Editor")
         Form.resize(1291, 540)
         self.tabWidgetInfo = QTabWidget(Form)
         self.tabWidgetInfo.setObjectName(u"tabWidgetInfo")
@@ -233,36 +242,36 @@ class Ui_Form(object):
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label_21.setText(QCoreApplication.translate("Form", u"Project Name", None))
-        self.label_22.setText(QCoreApplication.translate("Form", u"Description", None))
-        self.label_idText_3.setText(QCoreApplication.translate("Form", u"Id : 2", None))
-        self.label_24.setText(QCoreApplication.translate("Form", u"Project Type", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"Edit", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("Form", u"Video Game", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("Form", u"VFX", None))
-        self.comboBox.setItemText(3, QCoreApplication.translate("Form", u"Sculpt", None))
-        self.comboBox.setItemText(4, QCoreApplication.translate("Form", u"Sketch", None))
-        self.comboBox.setItemText(5, QCoreApplication.translate("Form", u"WIP", None))
-        self.comboBox.setItemText(6, QCoreApplication.translate("Form", u"Code", None))
-        self.comboBox.setItemText(7, QCoreApplication.translate("Form", u"Sandbox", None))
+        Form.setWindowTitle(QCoreApplication.translate("Project Editor", u"Project Editor", None))
+        self.label_21.setText(QCoreApplication.translate("Project Editor", u"Project Name", None))
+        self.label_22.setText(QCoreApplication.translate("Project Editor", u"Description", None))
+        self.label_idText_3.setText(QCoreApplication.translate("Project Editor", u"Id : 2", None))
+        self.label_24.setText(QCoreApplication.translate("Project Editor", u"Project Type", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("Project Editor", u"Edit", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("Project Editor", u"Video Game", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("Project Editor", u"VFX", None))
+        self.comboBox.setItemText(3, QCoreApplication.translate("Project Editor", u"Sculpt", None))
+        self.comboBox.setItemText(4, QCoreApplication.translate("Project Editor", u"Sketch", None))
+        self.comboBox.setItemText(5, QCoreApplication.translate("Project Editor", u"WIP", None))
+        self.comboBox.setItemText(6, QCoreApplication.translate("Project Editor", u"Code", None))
+        self.comboBox.setItemText(7, QCoreApplication.translate("Project Editor", u"Sandbox", None))
 
-        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_9), QCoreApplication.translate("Form", u"Info", None))
-        self.label_26.setText(QCoreApplication.translate("Form", u"Client", None))
-        self.pushButtonUserAdd_6.setText(QCoreApplication.translate("Form", u"Open", None))
-        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_10), QCoreApplication.translate("Form", u"Client", None))
-        self.label_29.setText(QCoreApplication.translate("Form", u"Scenes", None))
-        self.pushButtonClientsAdd_7.setText(QCoreApplication.translate("Form", u"+", None))
-        self.pushButtonClientsMinus_7.setText(QCoreApplication.translate("Form", u"-", None))
-        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_13), QCoreApplication.translate("Form", u"Scenes", None))
-        self.label_28.setText(QCoreApplication.translate("Form", u"Exports", None))
-        self.pushButtonClientsAdd_6.setText(QCoreApplication.translate("Form", u"+", None))
-        self.pushButtonClientsMinus_6.setText(QCoreApplication.translate("Form", u"-", None))
-        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_12), QCoreApplication.translate("Form", u"Exports", None))
-        self.label_30.setText(QCoreApplication.translate("Form", u"Delivery", None))
-        self.pushButtonClientsAdd_8.setText(QCoreApplication.translate("Form", u"+", None))
-        self.pushButtonClientsMinus_8.setText(QCoreApplication.translate("Form", u"-", None))
-        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab), QCoreApplication.translate("Form", u"Delivery", None))
-        self.label.setText(QCoreApplication.translate("Form", u"Project Editor", None))
+        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_9), QCoreApplication.translate("Project Editor", u"Info", None))
+        self.label_26.setText(QCoreApplication.translate("Project Editor", u"Client", None))
+        self.pushButtonUserAdd_6.setText(QCoreApplication.translate("Project Editor", u"Open", None))
+        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_10), QCoreApplication.translate("Project Editor", u"Client", None))
+        self.label_29.setText(QCoreApplication.translate("Project Editor", u"Scenes", None))
+        self.pushButtonClientsAdd_7.setText(QCoreApplication.translate("Project Editor", u"+", None))
+        self.pushButtonClientsMinus_7.setText(QCoreApplication.translate("Project Editor", u"-", None))
+        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_13), QCoreApplication.translate("Project Editor", u"Scenes", None))
+        self.label_28.setText(QCoreApplication.translate("Project Editor", u"Exports", None))
+        self.pushButtonClientsAdd_6.setText(QCoreApplication.translate("Project Editor", u"+", None))
+        self.pushButtonClientsMinus_6.setText(QCoreApplication.translate("Project Editor", u"-", None))
+        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab_12), QCoreApplication.translate("Project Editor", u"Exports", None))
+        self.label_30.setText(QCoreApplication.translate("Project Editor", u"Delivery", None))
+        self.pushButtonClientsAdd_8.setText(QCoreApplication.translate("Project Editor", u"+", None))
+        self.pushButtonClientsMinus_8.setText(QCoreApplication.translate("Project Editor", u"-", None))
+        self.tabWidgetInfo.setTabText(self.tabWidgetInfo.indexOf(self.tab), QCoreApplication.translate("Project Editor", u"Delivery", None))
+        self.label.setText(QCoreApplication.translate("Project Editor", u"Project Editor", None))
     # retranslateUi
 
