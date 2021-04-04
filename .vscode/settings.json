@@ -4,5 +4,12 @@
         "titleBar.activeBackground": "#4E2499",
         "titleBar.activeForeground": "#FBFAFE"
     },
-    "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName} ${separator} [Branch: master]"
+    "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName} ${separator} [Branch: master]",
+    "files.associations": {
+        "*.py": "python",
+        "postwizardwindow.h": "c",
+        "xlocale": "cpp",
+        "xutility": "cpp",
+        "system_error": "cpp"
+    }
 }
