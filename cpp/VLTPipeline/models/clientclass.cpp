@@ -32,3 +32,23 @@ void ClientClass::SetGroup(GroupsClass *GroupToUse)
 {
     Group_ = GroupToUse;
 }
+
+void ClientClass::SetClient(int Id_,int GroupId_,QString Name_,QString Description_,QString Icon_,QString FilePath_)
+{
+    id =Id_;
+    GroupId = GroupId_;
+    Name =Name_;
+    Description = Description_;
+    Icon =Icon_;
+    FilePath =FilePath_;
+}
+
+void ClientClass::ClientFromRecord(QSqlRecord Record)
+{
+    id = Record.value("ClientId").toInt();
+    GroupId = Record.value("Group_").toInt();
+    Name = Record.value("Name").toString();
+    Description = Record.value("Description").toString();
+    Icon = Record.value("Icon").toString();
+    FilePath = Record.value("FilePath").toString();
+}

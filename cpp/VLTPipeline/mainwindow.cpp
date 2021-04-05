@@ -43,6 +43,7 @@ void MainWindow::on_actionUsers_List_triggered()
     usersDialog = new UsersDialog(this); // Be sure to destroy your window somewhere
     usersDialog->RefreshDB();
     usersDialog->show();
+    usersDialog->SetLoaded();
 }
 void MainWindow::RefreshDB(){
 dbManager = new DbManager("pipelinegroup.db");

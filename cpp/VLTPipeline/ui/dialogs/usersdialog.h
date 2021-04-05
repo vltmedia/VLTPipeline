@@ -2,8 +2,12 @@
 #define USERSDIALOG_H
 #include "../../dbmanager.h"
 #include "../../models/userslist.h"
+#include "../../models/usersclass.h"
+#include "../../models/clientclass.h"
+#include "../../models/projectsclass.h"
 #include "../../models/groupsclass.h"
 #include "models/vltdatabasemanager.h"
+#include <QDialog>
 #include <QDialog>
 
 namespace Ui {
@@ -25,12 +29,23 @@ public:
      DbManager *dbManager;
      VLTDatabaseManager *DatabaseManager;
 
+     GroupsClass *Group;
+     UsersClass *User;
+
+     ClientClass *Client;
+     ProjectsClass *Project;
+     QList<GroupsClass*> Groups;
+     QList<ClientClass*> Clients;
+     QList<ProjectsClass*> Projects;
      UsersList *usersList;
      QModelIndex CurrentGroup;
+     int CurrentGroupIndex;
      GroupsClass *CurrentGroup_;
-
+     void SetLoaded();
+     void LoadClientFromIndex(int index);
 private slots:
     void on_pushButtonLoadusers_clicked();
+
 
 
     void on_pushButtonLoadclients_clicked();
@@ -44,6 +59,9 @@ private slots:
     void on_comboBoxGroups_currentIndexChanged(int index);
 
     void on_comboBoxClients_currentIndexChanged(int index);
+
+    void LoadUser();
+    void LoadUserGroups();
 
 private:
     Ui::UsersDialog *ui;

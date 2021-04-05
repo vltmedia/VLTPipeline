@@ -18,6 +18,7 @@ GroupsClass::GroupsClass(QObject *parent, int GroupId_,QString Name_ ,int UserId
 
 void GroupsClass::GroupFromQModelIndex(QModelIndex index)
 {
+try{
     GroupId=index.sibling(index.row(),0).data().toInt();
     Name = index.sibling(index.row(),1).data().toString();
     Description = index.sibling(index.row(),2).data().toString();
@@ -30,10 +31,39 @@ void GroupsClass::GroupFromQModelIndex(QModelIndex index)
 #endif
     QSqlQueryModel *modalUser;
    vltdatabaseman.GetUserid(QString::number(UserId), modalUser);
+    }catch (...) {
+
+}
 
 //    User.UserFromQSqlQueryModel(modalUser);
 
 
 //    qDebug() << this;
 
+}
+
+void GroupsClass::GroupFromRecord(QSqlRecord Record)
+{
+    try{
+//        GroupId=Record.value("GroupId").toInt();
+        GroupId=Record.value(0).toInt();
+        Name = Record.value("Name").toString();
+        Description =Record.value("Description").toString();
+         Icon = Record.value("Icon").toString();
+        UserId=Record.value("User").toInt();
+    #ifdef QT_DEBUG
+       VLTDatabaseManager vltdatabaseman(QCoreApplication::applicationDirPath() +"/mockdb.db");
+    #else
+        VLTDatabaseManager vltdatabaseman(QCoreApplication::applicationDirPath() +"/productiondb.db");
+    #endif
+        QSqlQueryModel *modalUser;
+       vltdatabaseman.GetUserid(QString::number(UserId), modalUser);
+        }catch (...) {
+
+    }
+}
+
+int GroupsClass::GetGroupId()
+{
+    return GroupId;
 }

@@ -10,14 +10,26 @@ public:
     explicit ProjectsClass(QObject *parent = nullptr);
     int id;
     QString Name;
-    QString ProjectType;
-    QString GroupNameOveride;
-    QString Client;
-    QString FilePath;
-    QString Delivery;
-    QString Website;
     QString Description;
     QString Icon;
+
+    QString ProjectType;
+    int Client;
+    QString Delivery;
+
+    int Status;
+    QString FilePath;
+
+
+
+    void SetProject(int Id, QString Name_,
+    QString Description_,
+    QString Icon_,
+    int Client_,
+    QString ProjectType_,
+    QString Delivery_,
+    int Status_,
+    QString FilePath_);
 
 signals:
 

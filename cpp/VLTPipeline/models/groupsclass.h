@@ -2,6 +2,7 @@
 #define GROUPSCLASS_H
 
 #include <QObject>
+#include <QSqlRecord>
 #include "usersclass.h"
 
 class GroupsClass : public QObject
@@ -17,6 +18,8 @@ public:
     QString Icon;
 
     void GroupFromQModelIndex(QModelIndex index);
+    void GroupFromRecord(QSqlRecord Record);
+    int GetGroupId();
 
 signals:
 
