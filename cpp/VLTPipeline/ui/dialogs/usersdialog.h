@@ -63,6 +63,8 @@ private slots:
     void LoadUser();
     void LoadUserGroups();
 
+    void on_comboBoxGroups_highlighted(const QString &arg1);
+
 private:
     Ui::UsersDialog *ui;
 };

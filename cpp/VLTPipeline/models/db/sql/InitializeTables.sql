@@ -5,71 +5,349 @@ DROP Table Client_;
 DROP Table Project_;
 
 
-
-
-CREATE TABLE IF NOT EXISTS User_ (
-	UserId integer PRIMARY KEY AUTOINCREMENT,
-	Name text,
-	Password text,
-	GroupNameOveride text,
-	About text,
-	Email text,
-	Signature text,
-	Website text,
-	Description text,
-	Icon text
-
-
+CREATE TABLE IF NOT EXISTS "User_" (
+  "UserId" SERIAL PRIMARY KEY,
+  "Name" text,
+  "GroupNameOveride" text,
+	"Password" text,
+	"About" text,
+	"Email" text,
+	"Signature" text,
+	"Website" text,
+	"Description" text,
+	"Icon" text
 
 );
 
-
-
-
-
-
-CREATE TABLE IF NOT EXISTS Group_ (
-	GroupId integer PRIMARY KEY AUTOINCREMENT,
-	Name text,
-	Description text,
-	Icon text,
-	User integer,
-	FOREIGN KEY (User)
-		REFERENCES User_ (UserId) 
-                ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS "Group_" (
+  "GroupId" SERIAL PRIMARY KEY,
+  "Name" text,
+  "Description" text,
+  "Icon" text,
+  "User" int,
+  FOREIGN KEY ("User") REFERENCES "User_" ("UserId")
+  ON UPDATE CASCADE
                 ON DELETE CASCADE 
 );
 
-CREATE TABLE IF NOT EXISTS  Client_ (
-	ClientId integer PRIMARY KEY AUTOINCREMENT,
-	Name text,
-	Description text,
-	Icon text,
-	
-	Group_ integer,
-	FilePath text,
-	FOREIGN KEY (Group_)
-		REFERENCES Group_ (GroupId)
-                ON UPDATE CASCADE
-                ON DELETE CASCADE 
-
-);
-
-CREATE TABLE IF NOT EXISTS Project_ (
-	ProjectId integer PRIMARY KEY AUTOINCREMENT,
-	Name text,
-	Description text,
-	Icon text,
-	ProjectType text,
-	Client integer,
-	Delivery blob,
-	Status integer,
-	FilePath text,
-	FOREIGN KEY (Client)
-		REFERENCES Client_ (ClientId) 
-                ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS "Client_" (
+  "ClientId" SERIAL PRIMARY KEY,
+  "Name" text,
+  "Description" text,
+  "Icon" text,
+  "Group_" int,
+  "FilePath" text,
+  FOREIGN KEY ("Group_") REFERENCES "Group_" ("GroupId")
+  ON UPDATE CASCADE
                 ON DELETE CASCADE 
 );
+
+CREATE TABLE IF NOT EXISTS "Project_" (
+  "ProjectId" SERIAL PRIMARY KEY,
+  "Name" text,
+  "Description" text,
+  "Icon" text,
+  "ProjectType" text,
+  "Client" int,
+  "Delivery" blob,
+  "Status" int,
+  "FilePath" text,
+  FOREIGN KEY ("Client") REFERENCES "Client_" ("ClientId")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "Scene_" (
+  "id" SERIAL PRIMARY KEY,
+  "SceneID" text,
+  "Version" text,
+  "Project" int,
+  "Exports" int,
+  FOREIGN KEY ("Project") REFERENCES "Project_" ("ProjectId")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "ShotFile_" (
+  "id" SERIAL PRIMARY KEY,
+  "FilePath" text,
+  "SoftwarePackage" timestamp,
+  "RenderEngine" int,
+  "Shot" int,
+  "Exports" int,
+  FOREIGN KEY ("Shot") REFERENCES "Shot_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "Shot_" (
+  "id" SERIAL PRIMARY KEY,
+  "ShotID" text,
+  "FullID" text,
+  "Version" text,
+  "Scene" int,
+  "EditFile" int,
+  "MainShotFile" int,
+  FOREIGN KEY ("Scene") REFERENCES "Scene_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("MainShotFile") REFERENCES "ShotFile_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("EditFile") REFERENCES "EditFileLoadedShots_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "EditFile_" (
+  "id" SERIAL PRIMARY KEY,
+  "FilePath" text,
+  "Version" text,
+  "SoftwarePackage" int,
+  "Project" int,
+  "Exports" int,
+  FOREIGN KEY ("Project") REFERENCES "Project_" ("ProjectId")ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("Exports") REFERENCES "Exports_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "EditFileLoadedShots_" (
+  "id" SERIAL PRIMARY KEY,
+  "EditFile" int
+);
+
+CREATE TABLE IF NOT EXISTS "Camera_" (
+  "id" SERIAL PRIMARY KEY,
+  "CameraName" text,
+  "Resolution" text,
+  "Version" text,
+  "Scene" int,
+  "MainShotFile" int,
+  "Exports" int
+);
+
+CREATE TABLE IF NOT EXISTS "SavedCameraPath_" (
+  "id" SERIAL PRIMARY KEY,
+  "Filepath" text,
+  "Camera" int,
+  FOREIGN KEY ("Camera") REFERENCES "Camera_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "CameraKeyframe_" (
+  "id" SERIAL PRIMARY KEY,
+  "CameraKeyframeList" int,
+  "Frame" text,
+  "Interpolation" text,
+  "PixelAspectRatio" int,
+  "Projection" text,
+  "FocalLength" int,
+  "FilmBack" text,
+  "ShutterTime" text,
+  "FocusDistance" text,
+  "Fstop" text,
+  "Bokeh" text,
+  "BackgroundImage" text,
+  "Transform" int,
+  FOREIGN KEY ("Transform") REFERENCES "Transform_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("CameraKeyframeList") REFERENCES "CameraKeyframeList_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "CameraKeyframeList_" (
+  "id" SERIAL PRIMARY KEY,
+  "Camera" int,
+  FOREIGN KEY ("Camera") REFERENCES "Camera_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "Transform_" (
+  "id" SERIAL PRIMARY KEY,
+  "Position" text,
+  "RotationEuler" text,
+  "RotationQuaternion" int,
+  "Scale" text
+);
+
+CREATE TABLE IF NOT EXISTS "TransformKeyframe_" (
+  "id" SERIAL PRIMARY KEY,
+  "Frame" int,
+  "Interpolation" text,
+  "Transform" int,
+  FOREIGN KEY ("Transform") REFERENCES "Transform_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "RenderEngine_" (
+  "id" SERIAL PRIMARY KEY,
+  "Filepath" text,
+  "RenderEngineName" text,
+  "Type" text,
+  "CommandArguments" text,
+  "Description" text
+);
+
+CREATE TABLE IF NOT EXISTS "SoftwarePackage_" (
+  "id" SERIAL PRIMARY KEY,
+  "Filepath" text,
+  "SoftwareName" text,
+  "Type" text,
+  "CommandArguments" text,
+  "Description" text
+);
+
+CREATE TABLE IF NOT EXISTS "Exports_" (
+  "id" SERIAL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS "ExportedFile_" (
+  "id" SERIAL PRIMARY KEY,
+  "Filepath" text,
+  "Type" text,
+  "Exports" int,
+  FOREIGN KEY ("Exports") REFERENCES "Exports_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "PreviewExport_" (
+  "id" SERIAL PRIMARY KEY,
+  "SoftwarePackage" int,
+  "RenderEngine" int,
+  "Version" text,
+  "Comped" text,
+  "CompBatPath" text,
+  "FPS" int,
+  "Frames" int,
+  "StartFrame" int,
+  "ShotFile" text,
+  "Exports" int,
+  FOREIGN KEY ("Exports") REFERENCES "Exports_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("ShotFile") REFERENCES "ShotFile_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("RenderEngine") REFERENCES "RenderEngine_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+FOREIGN KEY ("SoftwarePackage") REFERENCES "SoftwarePackage_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "FinalExport_" (
+  "id" SERIAL PRIMARY KEY,
+  "SoftwarePackage" int,
+  "RenderEngine" int,
+  "Version" text,
+  "Comped" text,
+  "CompBatPath" text,
+  "FPS" int,
+  "Frames" int,
+  "StartFrame" int,
+  "ShotFile" text,
+  "Exports" int,
+  FOREIGN KEY ("Exports") REFERENCES "Exports_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("ShotFile") REFERENCES "ShotFile_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("RenderEngine") REFERENCES "RenderEngine_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("SoftwarePackage") REFERENCES "SoftwarePackage_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "Delivery_" (
+  "id" SERIAL PRIMARY KEY,
+  "Version" text,
+  "Description" text,
+  "DistributionURL" text,
+  "DeliveryFiles" int,
+  FOREIGN KEY ("DeliveryFiles") REFERENCES "DeliveryFiles_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "DeliveryFiles_" (
+  "id" SERIAL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS "DeliveryFile_" (
+  "id" SERIAL PRIMARY KEY,
+  "Filepath" text,
+  "Type" text,
+  "DeliveryFiles" int,
+  FOREIGN KEY ("DeliveryFiles") REFERENCES "DeliveryFiles_" ("id")
+  ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "PostPipeline" (
+  "id" SERIAL PRIMARY KEY,
+  "Settings" int,
+  "Dependencies" int,
+  "Project" int,
+  
+FOREIGN KEY ("Settings") REFERENCES "PostPipelineSettings" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("Dependencies") REFERENCES "PostPipelineDependencies_" ("id")
+ON UPDATE CASCADE
+                ON DELETE CASCADE ,
+
+FOREIGN KEY ("Project") REFERENCES "Project_" ("ProjectId")
+ON UPDATE CASCADE
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE IF NOT EXISTS "PostPipelineSettings" (
+  "id" SERIAL PRIMARY KEY,
+  "ProjectName" text,
+  "Version" text,
+  "INIPath" text
+);
+
+CREATE TABLE IF NOT EXISTS "PostPipelineDependencies_" (
+  "id" SERIAL PRIMARY KEY,
+  "PipelinePath" text,
+  "AudioFile" text,
+  "OutputFolder" text,
+  "EditJson" text,
+  "EditCSV" text
+);
+
+
+
+
+
+
+
+
+
+
 insert into User_ (UserId, Name, Password, About, Email, Signature, Website, Description, Icon, GroupNameOveride) values (1, 'hboustead0', 'l8VE70jLR61X', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.', 'cbuyers0@symantec.com', 'Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla.', 'https://squarespace.com/vestibulum/rutrum/rutrum/neque.html?arcu=quam&adipiscing=pharetra&molestie=magna&hendrerit=ac&at=consequat&vulputate=metus&vitae=sapien&nisl=ut&aenean=nunc&lectus=vestibulum&pellentesque=ante&eget=ipsum&nunc=primis&donec=in&quis=faucibus&orci=orci&eget=luctus&orci=et&vehicula=ultrices&condimentum=posuere&curabitur=cubilia&in=curae&libero=mauris&ut=viverra&massa=diam&volutpat=vitae&convallis=quam&morbi=suspendisse&odio=potenti&odio=nullam&elementum=porttitor&eu=lacus', 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl.', 'Justo.mp3', 'Group');
 insert into User_ (UserId, Name, Password, About, Email, Signature, Website, Description, Icon, GroupNameOveride) values (2, 'rwyldish1', 'fEwuqgDvz', 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.', 'slambertz1@yellowbook.com', 'Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.', 'https://hc360.com/nulla/neque/libero/convallis/eget.js?lectus=ultrices&pellentesque=posuere&at=cubilia&nulla=curae&suspendisse=mauris&potenti=viverra&cras=diam&in=vitae&purus=quam&eu=suspendisse&magna=potenti&vulputate=nullam&luctus=porttitor&cum=lacus&sociis=at&natoque=turpis&penatibus=donec&et=posuere&magnis=metus&dis=vitae&parturient=ipsum&montes=aliquam&nascetur=non&ridiculus=mauris&mus=morbi&vivamus=non&vestibulum=lectus&sagittis=aliquam&sapien=sit&cum=amet&sociis=diam&natoque=in&penatibus=magna&et=bibendum&magnis=imperdiet&dis=nullam&parturient=orci&montes=pede&nascetur=venenatis&ridiculus=non&mus=sodales&etiam=sed&vel=tincidunt&augue=eu&vestibulum=felis&rutrum=fusce&rutrum=posuere&neque=felis&aenean=sed&auctor=lacus&gravida=morbi&sem=sem&praesent=mauris&id=laoreet&massa=ut&id=rhoncus&nisl=aliquet&venenatis=pulvinar&lacinia=sed', 'Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.', 'DonecPharetra.ppt', 'Group');
 insert into User_ (UserId, Name, Password, About, Email, Signature, Website, Description, Icon, GroupNameOveride) values (3, 'lkarolewski2', '9RE0CXg', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.', 'cfryer2@springer.com', 'Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.', 'https://vk.com/vel/pede/morbi/porttitor/lorem.png?sapien=quam&arcu=pede&sed=lobortis&augue=ligula&aliquam=sit&erat=amet&volutpat=eleifend&in=pede&congue=libero&etiam=quis&justo=orci&etiam=nullam&pretium=molestie&iaculis=nibh&justo=in&in=lectus&hac=pellentesque&habitasse=at&platea=nulla&dictumst=suspendisse&etiam=potenti&faucibus=cras&cursus=in&urna=purus&ut=eu&tellus=magna&nulla=vulputate&ut=luctus&erat=cum&id=sociis&mauris=natoque&vulputate=penatibus&elementum=et&nullam=magnis&varius=dis&nulla=parturient&facilisi=montes&cras=nascetur&non=ridiculus&velit=mus&nec=vivamus&nisi=vestibulum&vulputate=sagittis&nonummy=sapien&maecenas=cum&tincidunt=sociis&lacus=natoque&at=penatibus&velit=et&vivamus=magnis&vel=dis&nulla=parturient&eget=montes&eros=nascetur&elementum=ridiculus&pellentesque=mus&quisque=etiam&porta=vel&volutpat=augue&erat=vestibulum&quisque=rutrum&erat=rutrum&eros=neque&viverra=aenean&eget=auctor&congue=gravida&eget=sem&semper=praesent&rutrum=id&nulla=massa&nunc=id&purus=nisl&phasellus=venenatis&in=lacinia&felis=aenean&donec=sit&semper=amet&sapien=justo&a=morbi&libero=ut&nam=odio&dui=cras&proin=mi&leo=pede', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.', 'AmetJusto.ppt', 'Group');

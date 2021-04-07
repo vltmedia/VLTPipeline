@@ -65,8 +65,15 @@
      </property>
      <addaction name="actionUsers_List"/>
     </widget>
+    <widget class="QMenu" name="menuPreferences">
+     <property name="title">
+      <string>Preferences</string>
+     </property>
+     <addaction name="actionGeneral"/>
+    </widget>
     <addaction name="menuDialogs"/>
     <addaction name="actionRefresh"/>
+    <addaction name="menuPreferences"/>
    </widget>
    <widget class="QMenu" name="menuWizards">
     <property name="title">
@@ -98,6 +105,11 @@
   <action name="actionRefresh">
    <property name="text">
     <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionGeneral">
+   <property name="text">
+    <string>General</string>
    </property>
   </action>
  </widget>

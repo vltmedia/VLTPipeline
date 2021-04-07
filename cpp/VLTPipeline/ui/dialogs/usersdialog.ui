@@ -71,7 +71,7 @@
        <x>20</x>
        <y>40</y>
        <width>751</width>
-       <height>341</height>
+       <height>171</height>
       </rect>
      </property>
     </widget>
@@ -86,6 +86,22 @@
      </property>
      <property name="text">
       <string>Load Groups Clients</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frameTheme">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>250</y>
+       <width>751</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
     </widget>
    </widget>

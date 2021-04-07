@@ -4,8 +4,10 @@
 #include <QMainWindow>
 #include "postwizardwindow.h"
 #include "ui/dialogs/usersdialog.h"
+#include "ui/dialogs/userpreferencesdialog.h"
 #include "dbmanager.h"
 #include "models/userslist.h"
+#include "models/usersettingsclass.h"
 #include "server/tcpserver.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,9 +23,13 @@ public:
     DbManager *dbManager;
     UsersDialog *usersDialog;
     UsersList *usersList;
+    UserPreferencesDialog *userPrefs;
+    UserSettingsClass *userSettings;
     TCPServer *tcpserver;
     ~MainWindow();
 
+    void LoadStyle();
+    void LoadSettings();
 private slots:
     void on_actionPost_Production_triggered();
 
@@ -36,6 +42,8 @@ private slots:
     void on_actionRefresh_triggered();
 
     void on_pushButton_2_clicked();
+
+    void on_actionGeneral_triggered();
 
 public slots:
     void RefreshDB();

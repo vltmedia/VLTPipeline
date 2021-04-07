@@ -151,6 +151,7 @@ void UsersDialog::on_tableView_Clients_clicked(const QModelIndex &index)
 
 void UsersDialog::LoadClientFromIndex(int index)
 {
+    if(index > -1){
     ui->tableView_Clients->model()->index(index, 0).data().toString();
 
 //        ClientClass *Client = Clients.at(index);
@@ -176,10 +177,15 @@ void UsersDialog::LoadClientFromIndex(int index)
                 ui->comboBoxProjects->addItem(modalprojects->record(i).value("Name").toString());
         //     qDebug() << modalgroup->record(i).value("Name").toString();
     }
+    }else{
+        qDebug() << index;
+
+    }
 }
 
 void UsersDialog::on_comboBoxGroups_currentIndexChanged(int index)
 {
+
     if(Loaded == true){
     try {
 //            if(ClientsLoaded == true){
@@ -189,6 +195,9 @@ void UsersDialog::on_comboBoxGroups_currentIndexChanged(int index)
 //        CurrentGroup_ = new GroupsClass(this );
                 CurrentGroup_ = Groups.at(index);
 
+//qDebug() << Groups.at(index);
+
+//qDebug() << CurrentGroup_;
 //        CurrentGroup_ = Groups.at(index)->GroupId;
 //        CurrentGroupIndex = index;
 //         CurrentGroup_->GroupFromQModelIndex(ui->tableView_Groups->model()->index(index, 0));
@@ -252,10 +261,10 @@ void UsersDialog::LoadUserGroups()
    ui->comboBoxGroups->clear();
     for(int i = 0; i < modalgroup->rowCount(); ++i)
     {
-       GroupsClass negg;
-        negg.GroupFromRecord(modalgroup->record(i));
-        negg.GroupId = modalgroup->record(i).value("GroupId").toInt();
-        Groups.append(&negg);
+       GroupsClass* negg = new (GroupsClass);
+        negg->GroupFromRecord(modalgroup->record(i));
+        negg->GroupId = modalgroup->record(i).value("GroupId").toInt();
+        Groups.append(negg);
 ui->comboBoxGroups->addItem(modalgroup->record(i).value("Name").toString());
     }
 qDebug() << Groups.at(0)->GroupId;
@@ -264,3 +273,9 @@ qDebug() << Groups.at(0)->GroupId;
 //    qDebug() << Groups.count();
 }
 
+
+void UsersDialog::on_comboBoxGroups_highlighted(const QString &arg1)
+{
+//    qDebug() << "Poo";
+    SetLoaded();
+}
