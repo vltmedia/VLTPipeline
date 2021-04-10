@@ -84,10 +84,10 @@ DISTFILES += \
 
 # Copy Extra Files to the Directory this way
 COPIES += styles_files
-styles_files.files = $$files(styles/*)
+styles_files.files = $$files(styles/*.qss)
 styles_files.path =  $$OUT_PWD/debug/styles
 COPIES += styles_files_Release
-styles_files_Release.files = $$files(styles/*)
+styles_files_Release.files = $$files(styles/*.qss)
 styles_files_Release.path =  $$OUT_PWD/release/styles
 
 # //////////////////////////////////////////////////////////////////////
