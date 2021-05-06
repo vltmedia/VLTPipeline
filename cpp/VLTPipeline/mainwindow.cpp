@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
      tcpserver = new TCPServer(6778);
      LoadSettings();
 LoadStyle();
@@ -98,12 +99,15 @@ RefreshDB();
 
 void MainWindow::on_pushButton_2_clicked()
 {
-  tcpserver = new TCPServer(6778);
-//  qDebug() << "Testt";
 }
 
 void MainWindow::on_actionGeneral_triggered()
 {
      userPrefs = new UserPreferencesDialog(this);
     userPrefs->show();
+}
+
+void MainWindow::on_actionStart_TCP_Server_triggered()
+{
+    tcpserver = new TCPServer(6778);
 }

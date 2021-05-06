@@ -120,6 +120,9 @@ models_files_Release.path =  $$OUT_PWD/release/models/db/sql/
 
 # //////////////////////////////////////////////////////////////////////
 
+RESOURCES += \
+    fonts.qrc
+
 
 
 

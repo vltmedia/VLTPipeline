@@ -37,7 +37,25 @@
      </rect>
     </property>
     <property name="text">
-     <string>Start TCP</string>
+     <string>Start TCP Server</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Font Awesome 5 Free Solid</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>camera-retro</string>
     </property>
    </widget>
   </widget>
@@ -85,6 +103,19 @@
     <property name="title">
      <string>Pipeline</string>
     </property>
+    <widget class="QMenu" name="menuNetworking">
+     <property name="title">
+      <string>Networking</string>
+     </property>
+     <widget class="QMenu" name="menuServer">
+      <property name="title">
+       <string>Server</string>
+      </property>
+      <addaction name="actionStart_TCP_Server"/>
+     </widget>
+     <addaction name="menuServer"/>
+    </widget>
+    <addaction name="menuNetworking"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -110,6 +141,11 @@
   <action name="actionGeneral">
    <property name="text">
     <string>General</string>
+   </property>
+  </action>
+  <action name="actionStart_TCP_Server">
+   <property name="text">
+    <string>Start TCP Server</string>
    </property>
   </action>
  </widget>
